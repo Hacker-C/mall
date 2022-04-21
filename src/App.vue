@@ -1,11 +1,21 @@
 <template>
-  <div id="app">Hello, mall</div>
+  <div id="app">
+    <router-view></router-view>
+    <TabBar />
+  </div>
 </template>
 
 <script>
+import TabBar from '@/components/common/tabbar/TabBar'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    TabBar
+  }
 }
 </script>
 
-<style></style>
+<style lang="less" scoped>
+@import url('assets/css/base.less');
+</style>
