@@ -38,11 +38,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.53rem;
+  font-size: 20px;
   img {
-    margin-top: 0.2rem;
-    margin-bottom: 0.1rem;
-    width: 0.65rem;
+    margin-top: 8px;
+    margin-bottom: 3px;
+    width: 24px;
   }
 }
 </style>
