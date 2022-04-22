@@ -18,9 +18,14 @@ export default {}
 
 <style lang="less" scoped>
 .navbar {
-  height: 50px;
-  line-height: 50px;
+  height: @navbar-height;
+  line-height: @navbar-height;
   border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
   display: flex;
   .center {
     flex: 1;

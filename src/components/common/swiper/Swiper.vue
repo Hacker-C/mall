@@ -137,7 +137,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 * {
   margin: 0px;
   padding: 0px;
@@ -149,6 +149,7 @@ export default {
 
 .swiper {
   display: flex;
+  padding-top: @navbar-height;
 }
 .indicator {
   display: flex;

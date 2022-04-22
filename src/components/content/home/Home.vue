@@ -5,6 +5,59 @@
     </NavBar>
     <HomeSwiper :bannerImages="bannerImages" />
     <RecommendView :recommendImages="recommend" />
+    <FeaturesView />
+    <ul>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+    </ul>
   </div>
 </template>
 
@@ -12,6 +65,7 @@
 import NavBar from '@/components/common/navbar/NavBar'
 import HomeSwiper from './components/HomeSwiper'
 import RecommendView from './components/RecommendView'
+import FeaturesView from './components/FeaturesView'
 
 import { getHomeMultidata } from '@/apis/home.js'
 
@@ -20,7 +74,8 @@ export default {
   components: {
     NavBar,
     HomeSwiper,
-    RecommendView
+    RecommendView,
+    FeaturesView
   },
   data() {
     return {
