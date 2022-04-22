@@ -4,12 +4,14 @@
       <template #center>购物街</template>
     </NavBar>
     <HomeSwiper :bannerImages="bannerImages" />
+    <RecommendView :recommendImages="recommend" />
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/common/navbar/NavBar'
 import HomeSwiper from './components/HomeSwiper'
+import RecommendView from './components/RecommendView'
 
 import { getHomeMultidata } from '@/apis/home.js'
 
@@ -17,7 +19,8 @@ export default {
   name: 'Home',
   components: {
     NavBar,
-    HomeSwiper
+    HomeSwiper,
+    RecommendView
   },
   data() {
     return {
