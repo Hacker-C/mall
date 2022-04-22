@@ -16,6 +16,4 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-@import url('assets/css/base.less');
-</style>
+<style lang="less" scoped></style>

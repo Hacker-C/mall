@@ -18,9 +18,6 @@ export default {
       this.$router.push(this.link)
     }
   },
-  created() {
-    console.log(this.$route.path)
-  },
   computed: {
     isActive() {
       return this.$route.path === this.link
