@@ -9,6 +9,7 @@
   "dependencies": {
     "amfe-flexible": "^2.2.1",
     "less-loader": "^5.0.0",
+    "style-resources-loader": "^1.5.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.3"
   },
