@@ -38,7 +38,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 20px;
+  font-size: 16px;
   img {
     margin-top: 8px;
     margin-bottom: 3px;
