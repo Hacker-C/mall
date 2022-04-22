@@ -75,10 +75,9 @@ export default {
 .tabbar {
   background-color: #f5f4f5;
   height: 70px;
-  margin-bottom: 0.1rem;
   width: 100%;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   border-top: 1px solid #ccc;
   display: flex;
 }

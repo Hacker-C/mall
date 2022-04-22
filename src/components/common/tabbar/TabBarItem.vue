@@ -38,7 +38,7 @@ export default {
   font-size: 16px;
   img {
     margin-top: 8px;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     width: 24px;
   }
 }
