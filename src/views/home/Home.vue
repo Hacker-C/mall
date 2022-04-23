@@ -71,7 +71,7 @@ import HomeSwiper from './components/HomeSwiper'
 import RecommendView from './components/RecommendView'
 import FeaturesView from './components/FeaturesView'
 
-import TabBar from '../../common/tabbar/TabBar'
+import TabBar from '@/components/common/tabbar/TabBar'
 import NavBar from '@/components/common/navbar/NavBar'
 import TabControl from '@/components/content/tab-control/TabControl'
 import GoodsList from '@/components/content/goods/GoodsList'

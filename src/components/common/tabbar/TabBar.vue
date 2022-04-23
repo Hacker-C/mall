@@ -13,10 +13,10 @@
         <span>主页</span>
       </template>
     </TabBarItem>
-    <TabBarItem link="/classify">
+    <TabBarItem link="/category">
       <template v-slot:icon>
         <img
-          v-if="$route.path === '/classify'"
+          v-if="$route.path === '/category'"
           src="@/assets/icons/classify_active.png"
           alt=""
         />

@@ -9,10 +9,10 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 
-const Home = () => import('@/components/content/home/Home.vue')
-const Classify = () => import('@/components/content/classify/Classify.vue')
-const Cart = () => import('@/components/content/cart/Cart.vue')
-const Profile = () => import('@/components/content/profile/Profile.vue')
+const Home = () => import('@/views/home/Home.vue')
+const Category = () => import('@/views/category/Category.vue')
+const Cart = () => import('@/views/cart/Cart.vue')
+const Profile = () => import('@/views/profile/Profile.vue')
 
 const routes = [
   {
@@ -24,8 +24,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/classify',
-    component: Classify
+    path: '/category',
+    component: Category
   },
   {
     path: '/cart',
