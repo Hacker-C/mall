@@ -1,13 +1,15 @@
 <template>
   <div class="goods-item">
     <img :src="item.show.img" />
-    <p>{{ item.title }}</p>
     <div class="info">
-      <span>{{ price(item.orgPrice) }}</span>
-      <span>
-        <img class="star" src="@/assets/icons/star.png" alt="" />
-        {{ item.cfav }}
-      </span>
+      <p>{{ item.title }}</p>
+      <div>
+        <span class="price">{{ price(item.orgPrice) }}</span>
+        <span>
+          <img class="star" src="@/assets/icons/star.png" alt="" />
+          {{ item.cfav }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -30,27 +32,34 @@ export default {
 <style lang="less" scoped>
 .goods-item {
   width: 48%;
+  height: 340px;
+  position: relative;
   img {
     width: 100%;
   }
-  p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 18px;
-    padding: 5px;
-    color: #333;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
   .info {
-    display: flex;
-    justify-content: center;
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    div {
+      display: flex;
+      justify-content: center;
+    }
+    p {
+      width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 18px;
+      padding: 5px;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     span:nth-child(1) {
       color: @color-tint;
       margin-right: 5px;
     }
-    font-size: 20px;
   }
   .star {
     width: 23px;
