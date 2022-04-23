@@ -7,9 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.4.2",
+    "@better-scroll/pull-down": "^2.4.2",
+    "@better-scroll/pull-up": "^2.4.2",
     "amfe-flexible": "^2.2.1",
     "axios": "^0.26.1",
-    "better-scroll": "^2.4.2",
     "less-loader": "^5.0.0",
     "style-resources-loader": "^1.5.0",
     "vue": "^2.6.11",
