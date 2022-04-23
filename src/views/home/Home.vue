@@ -3,66 +3,16 @@
     <NavBar class="home-nav">
       <template #center>购物街</template>
     </NavBar>
-    <HomeSwiper :bannerImages="bannerImages" />
-    <RecommendView :recommendImages="recommend" />
-    <FeaturesView />
-    <TabControl
-      @changeGoodsList="changeGoodsList"
-      :tabs="['流行', '新款', '精选']"
-    />
-    <GoodsList :goodsList="goods[show].list" />
-    <ul>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-    </ul>
+    <Scroll class="wrapper">
+      <HomeSwiper :bannerImages="bannerImages" />
+      <RecommendView :recommendImages="recommend" />
+      <FeaturesView />
+      <TabControl
+        @changeGoodsList="changeGoodsList"
+        :tabs="['流行', '新款', '精选']"
+      />
+      <GoodsList :goodsList="goods[show].list" />
+    </Scroll>
   </div>
 </template>
 
@@ -73,6 +23,7 @@ import FeaturesView from './components/FeaturesView'
 
 import TabBar from '@/components/common/tabbar/TabBar'
 import NavBar from '@/components/common/navbar/NavBar'
+import Scroll from '@/components/common/scroll/Scroll'
 import TabControl from '@/components/content/tab-control/TabControl'
 import GoodsList from '@/components/content/goods/GoodsList'
 
@@ -85,6 +36,7 @@ export default {
     RecommendView,
     FeaturesView,
     NavBar,
+    Scroll,
     TabBar,
     TabControl,
     GoodsList
@@ -147,5 +99,8 @@ export default {
 .home-nav {
   background-color: @color-tint;
   color: #fff;
+}
+.wrapper {
+  height: calc(100vh - @navbar-height - 70px);
 }
 </style>
