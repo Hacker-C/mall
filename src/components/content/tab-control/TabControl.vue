@@ -51,8 +51,8 @@ export default {
     justify-content: center;
     span {
       display: inline-block;
-      height: 30px;
-      line-height: 30px;
+      height: 40px;
+      line-height: 40px;
       font-size: 20px;
       padding: 0 8px;
     }
