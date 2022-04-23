@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-wrapper" ref="scroll">
+  <div ref="scroll">
     <div class="scroll-content">
       <slot></slot>
     </div>
@@ -26,6 +26,10 @@ export default {
   mounted() {
     this.initScroll()
   },
+  // BUGFIX 解决因为图片资源加载慢而导致 BScroll 无法正确计算内容高度的问题
+  updated() {
+    this.initScroll()
+  },
   methods: {
     initScroll() {
       this.scroll = new BScroll(this.$refs.scroll, {
@@ -34,7 +38,6 @@ export default {
         pullUpLoad: true,
         pullDownRefresh: true
       })
-
       this.scroll.on('pullingUp', () => {
         console.log('上拉加载')
         // TIP 调用这个方法后才能执行下一次上拉加载
