@@ -43,6 +43,7 @@ export default {
   position: sticky;
   top: @navbar-height;
   background-color: #fff;
+  z-index: 999;
   div {
     flex: 1;
     text-align: center;
