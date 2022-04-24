@@ -3,15 +3,19 @@
     <NavBar class="home-nav">
       <template #center>购物街</template>
     </NavBar>
-    <Scroll class="wrapper">
-      <HomeSwiper :bannerImages="bannerImages" />
-      <RecommendView :recommendImages="recommend" />
-      <FeaturesView />
-      <TabControl
-        @changeGoodsList="changeGoodsList"
-        :tabs="['流行', '新款', '精选']"
-      />
-      <GoodsList :goodsList="goods[show].list" />
+    <BackTop v-show="isShowBackTop" @click.native="backtop" />
+    <Scroll class="wrapper" ref="scroll" :probeType="3" @scroll="onScroll">
+      <div>
+        <HomeSwiper :bannerImages="bannerImages" />
+        <RecommendView :recommendImages="recommend" />
+        <FeaturesView />
+        <TabControl
+          @changeGoodsList="changeGoodsList"
+          :tabs="['流行', '新款', '精选']"
+        />
+        <GoodsList :goodsList="goods[show].list" />
+      </div>
+      <div ref="top"></div>
     </Scroll>
   </div>
 </template>
@@ -24,10 +28,13 @@ import FeaturesView from './components/FeaturesView'
 import TabBar from '@/components/common/tabbar/TabBar'
 import NavBar from '@/components/common/navbar/NavBar'
 import Scroll from '@/components/common/scroll/Scroll'
+import BackTop from '@/components/content/backtop/BackTop'
 import TabControl from '@/components/content/tab-control/TabControl'
 import GoodsList from '@/components/content/goods/GoodsList'
 
 import { getHomeMultidata, getHomeData } from '@/apis/home.js'
+
+import { debounce, throttle } from '@/common/utils'
 
 export default {
   name: 'Home',
@@ -37,6 +44,7 @@ export default {
     FeaturesView,
     NavBar,
     Scroll,
+    BackTop,
     TabBar,
     TabControl,
     GoodsList
@@ -50,7 +58,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      show: 'pop'
+      show: 'pop',
+      isShowBackTop: false
     }
   },
   computed: {
@@ -90,6 +99,15 @@ export default {
         精选: 'sell'
       }
       this.show = hash[item]
+    },
+    backtop() {
+      this.$refs.scroll.scroll.scrollTo(0, 0, 500)
+    },
+    onScroll: throttle(function (x) {
+      this.test(x)
+    }, 1000),
+    test(x) {
+      this.isShowBackTop = Math.abs(x) > 800
     }
   }
 }
@@ -101,6 +119,6 @@ export default {
   color: #fff;
 }
 .wrapper {
-  height: calc(100vh - @navbar-height - 70px);
+  height: calc(100vh - 70px - @navbar-height);
 }
 </style>
