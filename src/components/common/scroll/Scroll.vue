@@ -8,13 +8,7 @@
 
 <script>
 // TIP 对引入的 better-scroll 进行二次封装
-// ! wrapper 记得给高度
-import BScroll from '@better-scroll/core'
-import PullUp from '@better-scroll/pull-up'
-import PullDown from '@better-scroll/pull-down'
-
-BScroll.use(PullUp)
-BScroll.use(PullDown)
+import BScroll from 'better-scroll'
 
 export default {
   name: 'Scroll',
@@ -39,6 +33,9 @@ export default {
     this.$nextTick(() => {
       this.initScroll()
     })
+  },
+  beforeDestroy() {
+    this.scroll.destroy()
   },
   methods: {
     initScroll() {

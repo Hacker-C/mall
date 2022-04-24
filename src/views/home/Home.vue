@@ -3,7 +3,6 @@
     <NavBar class="home-nav">
       <template #center>购物街</template>
     </NavBar>
-    <BackTop v-show="isShowBackTop" @click.native="backtop" />
     <Scroll class="wrapper" ref="scroll" :probeType="3" @scroll="onScroll">
       <div>
         <HomeSwiper :bannerImages="bannerImages" />
@@ -17,6 +16,7 @@
       </div>
       <div ref="top"></div>
     </Scroll>
+    <BackTop v-show="isShowBackTop" @click.native="backtop" />
   </div>
 </template>
 
@@ -105,7 +105,7 @@ export default {
     },
     onScroll: throttle(function (x) {
       this.test(x)
-    }, 1000),
+    }, 2000),
     test(x) {
       this.isShowBackTop = Math.abs(x) > 800
     }

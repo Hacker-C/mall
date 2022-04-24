@@ -35,7 +35,8 @@ export default {
   height: 340px;
   position: relative;
   img {
-    width: 100%;
+    width: 180px;
+    // height: 300px;
   }
   .info {
     font-size: 20px;
