@@ -17,6 +17,10 @@
 
 <script>
 // TODO 封装 VScroll 组件
+
+// TIP 节流函数
+import { throttle } from '@/common/utils.js'
+
 export default {
   name: 'VScroll',
   props: {
@@ -41,6 +45,34 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      x: 0,
+      y: 0,
+      timer: null
+    }
+  },
+  // TIP 方案1：解决无法监听 scroll 事件的问题
+  mounted() {
+    this.timer = setInterval(() => {
+      let { left, top } = this.$refs.vscroller.getPosition()
+      this.x = left
+      this.y = top
+      this.$emit('change', top)
+    }, 500)
+  },
+  beforeDestroy() {
+    this.timer = null
+  },
+  // TIP 方案2：解决无法监听 scroll 事件的问题
+  // updated() {
+  //   let _this = this
+  //   window.addEventListener('touchmove', function () {
+  //     // this.scrollTop
+  //     let top = _this.$refs.vscroller.getPosition().top
+  //     _this.$emit('scroll', top)
+  //   })
+  // },
   methods: {
     scrollTo() {
       this.$nextTick(() => {

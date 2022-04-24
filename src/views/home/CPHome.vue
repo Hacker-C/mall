@@ -3,7 +3,13 @@
     <NavBar class="home-nav">
       <template #center>购物街</template>
     </NavBar>
-    <VScroll :refresh="HRefresh" :infinite="HInfinite" ref="hscroller">
+    <VScroll
+      :refresh="HRefresh"
+      :infinite="HInfinite"
+      ref="hscroller"
+      style="overflow: scroll"
+      @change="onChange"
+    >
       <HomeSwiper :bannerImages="bannerImages" />
       <RecommendView :recommendImages="recommend" />
       <FeaturesView />
@@ -13,7 +19,7 @@
       />
       <GoodsList :goodsList="goods[show].list" />
     </VScroll>
-    <BBackTop @click.native="scrollToTop" />
+    <BBackTop v-show="isShowBackTop" @click.native="scrollToTop" />
   </div>
 </template>
 
@@ -76,6 +82,10 @@ export default {
     this.getHomeData('sell')
   },
   methods: {
+    onChange(y) {
+      // TIP 方案1：解决无法监听 scroll 事件的问题（VScroll.vue）
+      this.isShowBackTop = y > 800
+    },
     scrollToTop() {
       this.$nextTick(() => {
         this.$refs.hscroller.scrollTo()
