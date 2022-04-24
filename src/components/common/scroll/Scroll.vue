@@ -33,7 +33,9 @@ export default {
   methods: {
     initScroll() {
       this.scroll = new BScroll(this.$refs.scroll, {
-        probeType: 2,
+        probeType: 3,
+        // BUGFIX 解决上拉加载出现回弹问题
+        useTransition: false,
         click: true,
         pullUpLoad: true,
         pullDownRefresh: true
