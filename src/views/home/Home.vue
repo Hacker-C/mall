@@ -3,7 +3,13 @@
     <NavBar class="home-nav">
       <template #center>购物街</template>
     </NavBar>
-    <Scroll class="wrapper" ref="scroll" :probeType="3" @scroll="onScroll">
+    <VScroll
+      :refresh="HRefresh"
+      :infinite="HInfinite"
+      ref="hscroller"
+      style="overflow: scroll"
+      @change="onChange"
+    >
       <HomeSwiper :bannerImages="bannerImages" />
       <RecommendView :recommendImages="recommend" />
       <FeaturesView />
@@ -12,9 +18,8 @@
         :tabs="['流行', '新款', '精选']"
       />
       <GoodsList :goodsList="goods[show].list" />
-      <div ref="top"></div>
-    </Scroll>
-    <BackTop v-show="isShowBackTop" @click.native="backtop" />
+    </VScroll>
+    <BBackTop v-show="isShowBackTop" @click.native="scrollToTop" />
   </div>
 </template>
 
@@ -25,14 +30,14 @@ import FeaturesView from './components/FeaturesView'
 
 import TabBar from '@/components/common/tabbar/TabBar'
 import NavBar from '@/components/common/navbar/NavBar'
-import Scroll from '@/components/common/scroll/Scroll'
-import BackTop from '@/components/content/backtop/BackTop'
 import TabControl from '@/components/content/tab-control/TabControl'
 import GoodsList from '@/components/content/goods/GoodsList'
 
 import { getHomeMultidata, getHomeData } from '@/apis/home.js'
 
 import { debounce, throttle } from '@/common/utils'
+import BBackTop from '@/components/content/bbacktop/BBackTop'
+import VScroll from '@/components/common/scroll/VSroll'
 
 export default {
   name: 'Home',
@@ -41,11 +46,11 @@ export default {
     RecommendView,
     FeaturesView,
     NavBar,
-    Scroll,
-    BackTop,
+    BBackTop,
     TabBar,
     TabControl,
-    GoodsList
+    GoodsList,
+    VScroll
   },
   data() {
     return {
@@ -72,11 +77,37 @@ export default {
     // TIP 请求首页轮播图和第二模块推荐的数据
     this.getHomeMultidata()
     // TIP 请求首页商品的数据
-    this.getHomeData('pop')
     this.getHomeData('new')
     this.getHomeData('sell')
   },
   methods: {
+    onChange(y) {
+      // TIP 方案1：解决无法监听 scroll 事件的问题（VScroll.vue）
+      this.isShowBackTop = y > 800
+    },
+    scrollToTop() {
+      this.$nextTick(() => {
+        this.$refs.hscroller.scrollTo()
+      })
+    },
+    // TODO 下拉请求数据
+    HRefresh(done) {
+      setTimeout(() => {
+        done()
+      }, 1000)
+    },
+    // TODO 上拉请求数据
+    HInfinite: function (done) {
+      this.getHomeData(this.show).then(res => {
+        if (res === 'success') {
+          console.log(res)
+          done()
+        }
+        if (res === 'none') {
+          done(true)
+        }
+      })
+    },
     getHomeMultidata() {
       getHomeMultidata().then(res => {
         this.banners = res.data.banner.list
@@ -85,9 +116,14 @@ export default {
     },
     getHomeData(type) {
       const page = this.goods[type].page + 1
-      getHomeData(type, page).then(res => {
-        this.goods[type].list.push(...res.data.list)
-        this.goods[type].page++
+      return getHomeData(type, page).then(res => {
+        if (res.data.list.length) {
+          this.goods[type].list.push(...res.data.list)
+          this.goods[type].page++
+          return 'success'
+        } else {
+          return 'none'
+        }
       })
     },
     changeGoodsList(item) {
@@ -97,16 +133,6 @@ export default {
         精选: 'sell'
       }
       this.show = hash[item]
-    },
-    backtop() {
-      this.$refs.scroll.scroll.scrollTo(0, 0, 500)
-    },
-    // BUGFIX 节流
-    onScroll: throttle(function (x) {
-      this.test(x)
-    }, 1500),
-    test(x) {
-      this.isShowBackTop = Math.abs(x) > 800
     }
   }
 }
@@ -116,8 +142,5 @@ export default {
 .home-nav {
   background-color: @color-tint;
   color: #fff;
-}
-.wrapper {
-  height: calc(100vh - 70px - @navbar-height);
 }
 </style>
