@@ -4,6 +4,9 @@ import router from './router'
 import 'amfe-flexible'
 import './assets/css/base.less'
 
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
+
 Vue.config.productionTip = false
 
 new Vue({
