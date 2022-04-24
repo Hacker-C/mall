@@ -77,7 +77,6 @@ export default {
     // TIP 请求首页轮播图和第二模块推荐的数据
     this.getHomeMultidata()
     // TIP 请求首页商品的数据
-    this.getHomeData('pop')
     this.getHomeData('new')
     this.getHomeData('sell')
   },
@@ -91,15 +90,23 @@ export default {
         this.$refs.hscroller.scrollTo()
       })
     },
+    // TODO 下拉请求数据
     HRefresh(done) {
       setTimeout(() => {
         done()
       }, 1000)
     },
+    // TODO 上拉请求数据
     HInfinite: function (done) {
-      setTimeout(() => {
-        done()
-      }, 1500)
+      this.getHomeData(this.show).then(res => {
+        if (res === 'success') {
+          console.log(res)
+          done()
+        }
+        if (res === 'none') {
+          done(true)
+        }
+      })
     },
     getHomeMultidata() {
       getHomeMultidata().then(res => {
@@ -109,9 +116,14 @@ export default {
     },
     getHomeData(type) {
       const page = this.goods[type].page + 1
-      getHomeData(type, page).then(res => {
-        this.goods[type].list.push(...res.data.list)
-        this.goods[type].page++
+      return getHomeData(type, page).then(res => {
+        if (res.data.list.length) {
+          this.goods[type].list.push(...res.data.list)
+          this.goods[type].page++
+          return 'success'
+        } else {
+          return 'none'
+        }
       })
     },
     changeGoodsList(item) {
