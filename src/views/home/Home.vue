@@ -4,16 +4,14 @@
       <template #center>购物街</template>
     </NavBar>
     <Scroll class="wrapper" ref="scroll" :probeType="3" @scroll="onScroll">
-      <div>
-        <HomeSwiper :bannerImages="bannerImages" />
-        <RecommendView :recommendImages="recommend" />
-        <FeaturesView />
-        <TabControl
-          @changeGoodsList="changeGoodsList"
-          :tabs="['流行', '新款', '精选']"
-        />
-        <GoodsList :goodsList="goods[show].list" />
-      </div>
+      <HomeSwiper :bannerImages="bannerImages" />
+      <RecommendView :recommendImages="recommend" />
+      <FeaturesView />
+      <TabControl
+        @changeGoodsList="changeGoodsList"
+        :tabs="['流行', '新款', '精选']"
+      />
+      <GoodsList :goodsList="goods[show].list" />
       <div ref="top"></div>
     </Scroll>
     <BackTop v-show="isShowBackTop" @click.native="backtop" />
@@ -103,9 +101,10 @@ export default {
     backtop() {
       this.$refs.scroll.scroll.scrollTo(0, 0, 500)
     },
+    // BUGFIX 节流
     onScroll: throttle(function (x) {
       this.test(x)
-    }, 2000),
+    }, 1500),
     test(x) {
       this.isShowBackTop = Math.abs(x) > 800
     }
