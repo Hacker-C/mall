@@ -149,7 +149,6 @@ export default {
 
 .swiper {
   display: flex;
-  // padding-top: @navbar-height;
 }
 .indicator {
   display: flex;

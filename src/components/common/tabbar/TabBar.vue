@@ -76,7 +76,7 @@ export default {
   background-color: #f5f4f5;
   height: 70px;
   width: 100%;
-  position: fixed;
+  position: absolute;
   bottom: -1px;
   border-top: 1px solid #ccc;
   display: flex;
