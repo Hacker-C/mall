@@ -46,9 +46,13 @@ export default {
 
 <style lang="less" scoped>
 .info-container {
-  padding: 5px;
+  .info-title {
+    font-size: 19px;
+    padding: 10px;
+    color: #555;
+  }
   .price {
-    padding: 15px 0;
+    padding: 15px 10px;
     span {
       padding: 0 3px;
     }
@@ -76,7 +80,7 @@ export default {
     font-size: 17px;
     color: #8c8c8c;
     display: flex;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 5px solid #ccc;
     span {
       flex: 1;
       text-align: center;
@@ -84,14 +88,15 @@ export default {
   }
   .services {
     display: flex;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 10px solid #ccc;
     div {
+      padding: 10px;
       height: 80px;
       img {
         height: 20px;
       }
       span {
-        font-size: 20px;
+        font-size: 18px;
       }
       &:nth-child(1) {
         display: flex;
@@ -106,9 +111,5 @@ export default {
       }
     }
   }
-}
-.info-title {
-  font-size: 19px;
-  color: #555;
 }
 </style>
