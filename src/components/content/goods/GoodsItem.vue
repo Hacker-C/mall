@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="toDetail">
     <img :src="item.show.img" />
     <div class="info">
       <p>{{ item.title }}</p>
@@ -25,6 +25,9 @@ export default {
   methods: {
     price(p) {
       return p.slice(1)
+    },
+    toDetail() {
+      this.$router.push('/detail/' + this.item.iid)
     }
   }
 }
