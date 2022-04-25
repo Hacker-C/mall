@@ -1,23 +1,21 @@
 <template>
-  <div class="detail">
-    <NavBar>
-      <template #left>
-        <img src="@/assets/images/common/back.png" alt="返回" @click="back" />
-      </template>
-      <template #center>
-        <div class="title">
-          <div
-            v-for="(item, index) in list"
-            :key="index"
-            :class="{ active: index === currentIndex }"
-            @click="changeItem(index)"
-          >
-            {{ item }}
-          </div>
+  <NavBar class="navbar">
+    <template #left>
+      <img src="@/assets/images/common/back.png" alt="返回" @click="back" />
+    </template>
+    <template #center>
+      <div class="title">
+        <div
+          v-for="(item, index) in list"
+          :key="index"
+          :class="{ active: index === currentIndex }"
+          @click="changeItem(index)"
+        >
+          {{ item }}
         </div>
-      </template>
-    </NavBar>
-  </div>
+      </div>
+    </template>
+  </NavBar>
 </template>
 
 <script>
@@ -46,12 +44,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.detail {
-  img {
-    width: 30px;
-    margin-top: 10px;
-    margin-left: 8px;
-  }
+.navbar {
+  background-color: #fff;
+}
+img {
+  width: 30px;
+  margin-top: 10px;
+  margin-left: 8px;
 }
 .title {
   display: flex;
