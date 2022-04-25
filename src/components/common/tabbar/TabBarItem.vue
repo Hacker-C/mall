@@ -35,11 +35,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
   img {
-    margin-top: 8px;
+    margin-top: 10px;
     margin-bottom: 2px;
-    width: 24px;
+    width: 20px;
   }
 }
 </style>
