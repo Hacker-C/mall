@@ -19,7 +19,7 @@
       />
       <GoodsList :goodsList="goods[show].list" />
     </VScroll>
-    <BBackTop v-show="isShowBackTop" @click.native="scrollToTop" />
+    <BackTop v-show="isShowBackTop" @click.native="scrollToTop" />
   </div>
 </template>
 
@@ -36,7 +36,7 @@ import GoodsList from '@/components/content/goods/GoodsList'
 import { getHomeMultidata, getHomeData } from '@/apis/home.js'
 
 import { debounce, throttle } from '@/common/utils'
-import BBackTop from '@/components/content/bbacktop/BBackTop'
+import BackTop from '@/components/content/backtop/BackTop'
 import VScroll from '@/components/common/scroll/VSroll'
 
 export default {
@@ -46,7 +46,7 @@ export default {
     RecommendView,
     FeaturesView,
     NavBar,
-    BBackTop,
+    BackTop,
     TabBar,
     TabControl,
     GoodsList,

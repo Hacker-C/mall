@@ -4,16 +4,16 @@
 
 <script>
 export default {
-  name: 'BackTop'
+  name: 'BBackTop'
 }
 </script>
 
 <style lang="less" scoped>
 img {
-  width: 45px;
-  position: fixed;
-  right: 10px;
-  bottom: 80px;
+  height: 50px;
   z-index: 999;
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
 }
 </style>
