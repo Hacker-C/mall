@@ -21,6 +21,7 @@ export default {}
   height: @navbar-height;
   line-height: @navbar-height;
   border-bottom: 1px solid #ccc;
+  // TODO 原生滚动需要使用
   position: fixed;
   top: 0;
   left: 0;

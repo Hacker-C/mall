@@ -40,8 +40,7 @@ export default {
 <style lang="less" scoped>
 .tab-control {
   display: flex;
-  position: sticky;
-  top: @navbar-height;
+  width: 100%;
   background-color: #fff;
   z-index: 999;
   div {

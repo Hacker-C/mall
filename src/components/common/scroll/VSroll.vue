@@ -59,7 +59,7 @@ export default {
       this.x = left
       this.y = top
       this.$emit('change', top)
-    }, 500)
+    }, 200)
   },
   beforeDestroy() {
     this.timer = null
@@ -74,13 +74,14 @@ export default {
   //   })
   // },
   methods: {
-    scrollTo() {
-      this.$nextTick(() => {
-        this.$refs.vscroller.scrollTo(0, 0, true)
-      })
+    scrollTo(x, y, animate = true) {
+      this.$refs.vscroller.scrollTo(x, y, animate)
       // TODO 设置动画后，需要点两下，才能生效
       // BUGFIX 不是 bug，是因为要等动画停止，才能触发点击事件
       // TODO this.$refs.vscroller.scrollTo(0, 0, true)
+    },
+    resize() {
+      this.$refs.vscroller.resize()
     }
   }
 }
