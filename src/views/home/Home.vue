@@ -61,11 +61,12 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      show: 'pop',
+      show: 'pop', // TIP 决定 tab 切换
       isShowBackTop: false
     }
   },
   computed: {
+    // TIP 计算属性，计算轮播图所需要的图片地址和链接
     bannerImages() {
       return this.banners.map(item => {
         const { image, link } = item
@@ -74,57 +75,65 @@ export default {
     }
   },
   created() {
-    // TIP 请求首页轮播图和第二模块推荐的数据
-    this.getHomeMultidata()
-    // TIP 请求首页商品的数据
-    this.getHomeData('new')
-    this.getHomeData('sell')
+    this.initData()
   },
   methods: {
+    initData() {
+      // TIP 请求首页轮播图和第二模块推荐的数据
+      this.initTop()
+      // TIP 请求首页商品的数据
+      this.getHomeData('pop')
+      this.getHomeData('new')
+      this.getHomeData('sell')
+    },
     onChange(y) {
       // TIP 方案1：解决无法监听 scroll 事件的问题（VScroll.vue）
+      // 回到顶部
       this.isShowBackTop = y > 800
     },
     scrollToTop() {
       this.$nextTick(() => {
+        // TIP 调用 VScroller 组件内部的方法回到顶部
         this.$refs.hscroller.scrollTo()
       })
     },
-    // TODO 下拉请求数据
+    // TODO 下拉刷新
     HRefresh(done) {
+      this.initData()
       setTimeout(() => {
         done()
-      }, 1000)
+      }, 500)
     },
     // TODO 上拉请求数据
-    HInfinite: function (done) {
-      this.getHomeData(this.show).then(res => {
-        if (res === 'success') {
-          console.log(res)
-          done()
-        }
-        if (res === 'none') {
-          done(true)
-        }
-      })
+    async HInfinite(done) {
+      let msg = await this.getHomeData(this.show)
+      if (msg === 'success') {
+        done()
+      } else {
+        done(true)
+      }
     },
-    getHomeMultidata() {
-      getHomeMultidata().then(res => {
-        this.banners = res.data.banner.list
-        this.recommend = res.data.recommend.list
-      })
+    async initTop() {
+      // TIP 获取首页轮播图和推荐数据
+      let res = await getHomeMultidata()
+      res = res.data
+      this.banners = res.banner.list
+      this.recommend = res.recommend.list
     },
-    getHomeData(type) {
+    async getHomeData(type) {
+      // TIP 获取首页商品数据，每次请求都增加数据页数
+      // TIP 第一次请求 30 个数据，第二次再请求 30 个，递增
       const page = this.goods[type].page + 1
-      return getHomeData(type, page).then(res => {
-        if (res.data.list.length) {
-          this.goods[type].list.push(...res.data.list)
-          this.goods[type].page++
-          return 'success'
-        } else {
-          return 'none'
-        }
-      })
+      let res = await getHomeData(type, page)
+      let list = res.data.list
+      if (list.length > 0) {
+        this.goods[type].list.push(...res.data.list)
+        // ! 递增
+        this.goods[type].page++
+        return 'success'
+      } else {
+        return 'none'
+      }
     },
     changeGoodsList(item) {
       let hash = {

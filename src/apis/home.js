@@ -1,12 +1,12 @@
 import request from './request'
 
-export function getHomeMultidata() {
+export async function getHomeMultidata() {
   return request({
     url: '/home/multidata'
   })
 }
 
-export function getHomeData(type, page) {
+export async function getHomeData(type, page) {
   return request({
     url: '/home/data',
     params: {
