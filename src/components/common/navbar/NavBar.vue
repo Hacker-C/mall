@@ -28,6 +28,7 @@ export default {}
   right: 0;
   z-index: 999;
   display: flex;
+  font-size: 22px;
   .center {
     flex: 1;
     text-align: center;
