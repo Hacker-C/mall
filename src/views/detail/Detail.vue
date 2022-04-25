@@ -3,6 +3,7 @@
     <DetailNavBar />
     <DetailSwiper :images="topImages" />
     <DetailBaseInfo :info="goods" />
+    <DetailShopInfo :shop="shop" />
   </div>
 </template>
 
@@ -10,8 +11,9 @@
 import DetailNavBar from './components/DetailNavBar.vue'
 import DetailSwiper from './components/DetailSwiper.vue'
 import DetailBaseInfo from './components/DetailBaseInfo.vue'
+import DetailShopInfo from './components/DetailShopInfo.vue'
 
-import { getDetail, Goods } from '@/apis/detail.js'
+import { getDetail, Goods, Shop } from '@/apis/detail.js'
 
 export default {
   name: 'Detail',
@@ -19,7 +21,8 @@ export default {
     return {
       iid: '',
       topImages: [],
-      goods: {}
+      goods: {},
+      shop: {}
     }
   },
   created() {
@@ -33,15 +36,17 @@ export default {
       let data = res.result
       this.topImages = data.itemInfo.topImages
       // TIP 获取商品基本信息
-      console.log(data)
       let goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
       this.goods = goods
+      let shop = new Shop(data.shopInfo)
+      this.shop = shop
     }
   },
   components: {
     DetailNavBar,
     DetailSwiper,
-    DetailBaseInfo
+    DetailBaseInfo,
+    DetailShopInfo
   }
 }
 </script>
