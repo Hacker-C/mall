@@ -3,7 +3,6 @@
     :refreshLayerColor="'red'"
     :refreshText="'疯狂刷新中'"
     :noDataText="'没有更多数据了...'"
-    :snappingHeight="'140'"
     style="padding-top: 50px"
     :on-refresh="refresh"
     :on-infinite="infinite"
@@ -53,12 +52,15 @@ export default {
     }
   },
   // TIP 方案1：解决无法监听 scroll 事件的问题
-  mounted() {
+  updated() {
     this.timer = setInterval(() => {
-      let { left, top } = this.$refs.vscroller.getPosition()
-      this.x = left
-      this.y = top
-      this.$emit('change', top)
+      // BUGFIX 解决切换路由无法读取 getPosition 问题
+      if (this.$refs.vscroller && this.$refs.vscroller.getPosition) {
+        let { left, top } = this.$refs.vscroller.getPosition()
+        this.x = left
+        this.y = top
+        this.$emit('change', top)
+      }
     }, 200)
   },
   beforeDestroy() {
@@ -70,7 +72,7 @@ export default {
   //   window.addEventListener('touchmove', function () {
   //     // this.scrollTop
   //     let top = _this.$refs.vscroller.getPosition().top
-  //     _this.$emit('scroll', top)
+  //     _this.$emit('change', top)
   //   })
   // },
   methods: {
