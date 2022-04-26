@@ -80,7 +80,7 @@ export default {
     font-size: 17px;
     color: #8c8c8c;
     display: flex;
-    border-bottom: 5px solid #ccc;
+    border-bottom: 3px solid #ccc;
     span {
       flex: 1;
       text-align: center;
@@ -88,7 +88,7 @@ export default {
   }
   .services {
     display: flex;
-    border-bottom: 10px solid #ccc;
+    border-bottom: 3px solid #ccc;
     div {
       padding: 10px;
       height: 80px;
