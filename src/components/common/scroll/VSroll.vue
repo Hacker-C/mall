@@ -59,9 +59,14 @@ export default {
         let { left, top } = this.$refs.vscroller.getPosition()
         this.x = left
         this.y = top
-        this.$emit('change', top)
       }
-    }, 200)
+    }, 300)
+  },
+  // TIP 监听 emit(change) 事件，只有当 scrollTop 值改变了才发送事件给 home
+  watch: {
+    y() {
+      this.$emit('change', this.y)
+    }
   },
   beforeDestroy() {
     this.timer = null
