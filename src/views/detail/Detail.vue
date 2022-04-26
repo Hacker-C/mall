@@ -1,9 +1,16 @@
 <template>
   <div class="detail-container">
     <DetailNavBar />
-    <DetailSwiper :images="topImages" />
-    <DetailBaseInfo :info="goods" />
-    <DetailShopInfo :shop="shop" />
+    <VScroll
+      :refresh="DRefresh"
+      :infinite="DInfinite"
+      ref="dscroll"
+      @change="onChange"
+    >
+      <DetailSwiper :images="topImages" />
+      <DetailBaseInfo :info="goods" />
+      <DetailShopInfo :shop="shop" />
+    </VScroll>
   </div>
 </template>
 
@@ -12,6 +19,8 @@ import DetailNavBar from './components/DetailNavBar.vue'
 import DetailSwiper from './components/DetailSwiper.vue'
 import DetailBaseInfo from './components/DetailBaseInfo.vue'
 import DetailShopInfo from './components/DetailShopInfo.vue'
+
+import VScroll from '@/components/common/scroll/VSroll'
 
 import { getDetail, Goods, Shop } from '@/apis/detail.js'
 
@@ -22,7 +31,8 @@ export default {
       iid: '',
       topImages: [],
       goods: {},
-      shop: {}
+      shop: {},
+      temp: 0
     }
   },
   created() {
@@ -40,13 +50,23 @@ export default {
       this.goods = goods
       let shop = new Shop(data.shopInfo)
       this.shop = shop
+    },
+    DRefresh(done) {
+      setTimeout(() => {
+        done()
+      }, 1000)
+    },
+    DInfinite() {},
+    onChange(y) {
+      this.temp = y
     }
   },
   components: {
     DetailNavBar,
     DetailSwiper,
     DetailBaseInfo,
-    DetailShopInfo
+    DetailShopInfo,
+    VScroll
   }
 }
 </script>
@@ -54,5 +74,6 @@ export default {
 <style lang="less" scoped>
 .detail-container {
   padding-bottom: 70px;
+  background-color: #fff;
 }
 </style>

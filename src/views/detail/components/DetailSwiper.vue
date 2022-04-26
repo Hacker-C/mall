@@ -30,7 +30,6 @@ export default {
 
 <style lang="less" scoped>
 .swiper-wrapper {
-  margin-top: @navbar-height;
   height: 300px;
   overflow: hidden;
 }
