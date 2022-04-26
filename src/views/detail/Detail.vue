@@ -10,6 +10,7 @@
       <DetailSwiper :images="topImages" />
       <DetailBaseInfo :info="goods" />
       <DetailShopInfo :shop="shop" />
+      <DetailGoodsInfo :detailInfo="detailInfo" />
     </VScroll>
   </div>
 </template>
@@ -19,6 +20,7 @@ import DetailNavBar from './components/DetailNavBar.vue'
 import DetailSwiper from './components/DetailSwiper.vue'
 import DetailBaseInfo from './components/DetailBaseInfo.vue'
 import DetailShopInfo from './components/DetailShopInfo.vue'
+import DetailGoodsInfo from './components/DetailGoodsInfo.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
 
@@ -53,7 +55,6 @@ export default {
       let shop = new Shop(data.shopInfo)
       this.shop = shop
       this.detailInfo = data.detailInfo
-      console.log(data)
     },
     DRefresh(done) {
       setTimeout(() => {
@@ -70,6 +71,7 @@ export default {
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
+    DetailGoodsInfo,
     VScroll
   }
 }
