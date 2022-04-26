@@ -4,9 +4,17 @@
       <h3>{{ info.title }}</h3>
     </div>
     <div class="price">
-      <span class="new-price">{{ info.newPrice }}</span>
+      <span
+        v-if="info.newPrice"
+        :style="{ fontSize: info.newPrice.length > 10 ? '23px' : '' }"
+        class="new-price"
+      >
+        {{ info.newPrice }}
+      </span>
       <span class="old-price">{{ info.oldPrice }}</span>
-      <span class="discount-desc">{{ info.discount }}</span>
+      <span v-if="info.discount" class="discount-desc">
+        {{ info.discount }}
+      </span>
     </div>
     <div class="extra" v-if="info.columns">
       <span>{{ info.columns[0] }}</span>
