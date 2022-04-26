@@ -3,7 +3,7 @@
     <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
-    <TabBar />
+    <TabBar v-if="!/detail/.test($route.path)" />
   </div>
 </template>
 
