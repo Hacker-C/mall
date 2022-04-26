@@ -31,6 +31,9 @@
         </ul>
       </div>
     </main>
+    <footer>
+      <div>进店逛逛</div>
+    </footer>
   </div>
 </template>
 
@@ -114,6 +117,21 @@ export default {
           }
         }
       }
+    }
+  }
+  footer {
+    display: flex;
+    justify-content: center;
+    div {
+      font-size: 18px;
+      color: @color-text;
+      background-color: #f1f5fb;
+      width: 180px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 5px;
+      margin-top: 20px;
     }
   }
 }
