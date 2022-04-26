@@ -88,7 +88,7 @@ export default {
     font-size: 17px;
     color: #8c8c8c;
     display: flex;
-    border-bottom: 3px solid #ccc;
+    border-bottom: 5px solid @color-bg;
     span {
       flex: 1;
       text-align: center;
@@ -96,7 +96,7 @@ export default {
   }
   .services {
     display: flex;
-    border-bottom: 3px solid #ccc;
+    border-bottom: 5px solid @color-bg;
     div {
       padding: 10px;
       height: 80px;

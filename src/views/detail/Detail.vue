@@ -32,7 +32,8 @@ export default {
       topImages: [],
       goods: {},
       shop: {},
-      temp: 0
+      temp: 0,
+      detailInfo: {}
     }
   },
   created() {
@@ -48,8 +49,11 @@ export default {
       // TIP 获取商品基本信息
       let goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
       this.goods = goods
+      // TIP 获取店铺信息
       let shop = new Shop(data.shopInfo)
       this.shop = shop
+      this.detailInfo = data.detailInfo
+      console.log(data)
     },
     DRefresh(done) {
       setTimeout(() => {

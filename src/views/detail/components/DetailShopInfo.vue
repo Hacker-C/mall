@@ -91,7 +91,7 @@ export default {
         display: block;
         height: 50px;
         width: 1px;
-        background-color: #ccc;
+        background-color: @color-bg;
         position: absolute;
         top: 15px;
       }
@@ -122,6 +122,7 @@ export default {
   footer {
     display: flex;
     justify-content: center;
+    border-bottom: 5px solid @color-bg;
     div {
       font-size: 18px;
       color: @color-text;
@@ -131,7 +132,7 @@ export default {
       text-align: center;
       line-height: 40px;
       border-radius: 5px;
-      margin-top: 20px;
+      margin: 20px 0;
     }
   }
 }
