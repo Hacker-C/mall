@@ -1,7 +1,7 @@
 <template>
   <scroller
-    :refreshLayerColor="'red'"
-    :refreshText="'疯狂刷新中'"
+    :refreshLayerColor="refreshLayerColor"
+    :refreshText="refreshText"
     :noDataText="'没有更多数据了...'"
     style="padding-top: 50px"
     :on-refresh="refresh"
@@ -25,23 +25,23 @@ export default {
   props: {
     refresh: {
       type: Function,
-      default() {
-        return function (done) {
-          setTimeout(() => {
-            done()
-          }, 1000)
-        }
+      default: function (done) {
+        done()
       }
     },
     infinite: {
       type: Function,
-      default() {
-        return function (done) {
-          setTimeout(() => {
-            done()
-          }, 1000)
-        }
+      default: function (done) {
+        done()
       }
+    },
+    refreshText: {
+      type: String,
+      default: ''
+    },
+    refreshLayerColor: {
+      type: String,
+      default: 'transparent'
     }
   },
   data() {

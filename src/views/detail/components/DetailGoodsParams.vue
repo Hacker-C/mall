@@ -55,10 +55,13 @@ export default {
     }
   }
   .info {
+    border-bottom: 4px solid @color-bg;
     ul li {
       display: flex;
       padding: 11px 0;
-      border-bottom: 1px solid #ddd;
+      &:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+      }
       span:nth-child(1) {
         flex: 1;
         display: flex;

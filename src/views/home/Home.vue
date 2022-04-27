@@ -13,6 +13,8 @@
     <VScroll
       :refresh="HRefresh"
       :infinite="HInfinite"
+      refreshText="松开刷新"
+      refreshLayerColor="#fe647f"
       ref="hscroller"
       @change="onChange"
     >

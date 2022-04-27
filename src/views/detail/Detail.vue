@@ -1,17 +1,13 @@
 <template>
   <div class="detail-container">
     <DetailNavBar />
-    <VScroll
-      :refresh="DRefresh"
-      :infinite="DInfinite"
-      ref="dscroll"
-      @change="onChange"
-    >
+    <VScroll ref="dscroll" @change="onChange">
       <DetailSwiper :images="topImages" />
       <DetailBaseInfo :info="goods" />
       <DetailShopInfo :shop="shop" />
       <DetailGoodsInfo :detailInfo="detailInfo" />
       <DetailGoodsParams :goodsParams="goodsParams" />
+      <DetailGoodsComments :rates="rates" />
     </VScroll>
   </div>
 </template>
@@ -23,6 +19,7 @@ import DetailBaseInfo from './components/DetailBaseInfo.vue'
 import DetailShopInfo from './components/DetailShopInfo.vue'
 import DetailGoodsInfo from './components/DetailGoodsInfo.vue'
 import DetailGoodsParams from './components/DetailGoodsParams.vue'
+import DetailGoodsComments from './components/DetailGoodsComments.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
 
@@ -38,7 +35,8 @@ export default {
       shop: {},
       temp: 0,
       detailInfo: {},
-      goodsParams: {}
+      goodsParams: {},
+      rates: {}
     }
   },
   created() {
@@ -66,6 +64,8 @@ export default {
         data.itemParams.info,
         data.itemParams.rule
       )
+      // TIP 商品评论信息
+      this.rates = data.rate
     },
     DRefresh(done) {
       setTimeout(() => {
@@ -84,6 +84,7 @@ export default {
     DetailShopInfo,
     DetailGoodsInfo,
     DetailGoodsParams,
+    DetailGoodsComments,
     VScroll
   }
 }
