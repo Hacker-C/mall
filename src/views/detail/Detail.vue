@@ -1,14 +1,18 @@
 <template>
   <div class="detail-container">
-    <DetailNavBar />
-    <VScroll ref="dscroll" @change="onChange">
+    <DetailNavBar @scrollTo="scrollTo" />
+    <VScroll ref="dscroller" @change="onChange">
       <DetailSwiper :images="topImages" />
       <DetailBaseInfo :info="goods" />
       <DetailShopInfo :shop="shop" />
-      <DetailGoodsInfo :detailInfo="detailInfo" />
-      <DetailGoodsParams :goodsParams="goodsParams" />
-      <DetailGoodsComments :rates="rates" />
-      <GoodsList :goodsList="recommendGoods" title="更多相似推荐" />
+      <DetailGoodsInfo :detailInfo="detailInfo" @change="imagesLoaded" />
+      <DetailGoodsParams :goodsParams="goodsParams" ref="paramsCpn" />
+      <DetailGoodsComments :rates="rates" ref="commentsCpn" />
+      <GoodsList
+        :goodsList="recommendGoods"
+        title="更多相似推荐"
+        ref="recommendCpn"
+      />
     </VScroll>
   </div>
 </template>
@@ -45,7 +49,10 @@ export default {
       detailInfo: {},
       goodsParams: {},
       rates: {},
-      recommendGoods: []
+      recommendGoods: [],
+      paramsY: 0, // TIP 商品参数模块的 offsetTop
+      commentsY: 0,
+      recommendY: 0
     }
   },
   created() {
@@ -54,6 +61,9 @@ export default {
     this.getGoodsData(this.iid)
     // 请求商品推荐数据
     this.getRecommend()
+  },
+  mounted() {
+    this.imagesLoaded()
   },
   methods: {
     async getGoodsData(iid) {
@@ -85,6 +95,27 @@ export default {
     },
     onChange(y) {
       this.temp = y
+    },
+    imagesLoaded() {
+      this.paramsY = this.$refs.paramsCpn.$el.offsetTop
+      this.commentsY = this.$refs.commentsCpn.$el.offsetTop
+      this.recommendY = this.$refs.recommendCpn.$el.offsetTop
+    },
+    scrollTo(x) {
+      if (x === 0) this.help(0)
+      else if (x === 1) this.help(this.paramsY - 50)
+      else if (x === 2) {
+        this.help(this.commentsY - 50)
+      } else {
+        // x === 3
+        this.help(this.recommendY - 50)
+      }
+    },
+    help(y) {
+      this.$refs.dscroller.scrollTo(0, y)
+      setTimeout(() => {
+        this.$refs.dscroller.scrollTo(0, y)
+      }, 10)
     }
   },
   components: {

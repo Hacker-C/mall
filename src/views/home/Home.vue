@@ -121,7 +121,14 @@ export default {
     },
     scrollToTop() {
       // TIP 调用 VScroller 组件内部的方法回到顶部
+      // BUGFIX 解决需要点击两次才能回到顶部的问题（第一次停止transform的移动，第二次调用其移动）
+      this.help()
+    },
+    help() {
       this.$refs.hscroller.scrollTo(0, 0)
+      setTimeout(() => {
+        this.$refs.hscroller.scrollTo(0, 0)
+      }, 10)
     },
     // TODO 下拉刷新
     HRefresh(done) {

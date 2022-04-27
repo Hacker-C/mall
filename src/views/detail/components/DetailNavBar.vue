@@ -35,6 +35,20 @@ export default {
   methods: {
     changeItem(index) {
       this.currentIndex = index
+      switch (index) {
+        case 0:
+          this.$emit('scrollTo', 0)
+          break
+        case 1:
+          this.$emit('scrollTo', 1)
+          break
+        case 2:
+          this.$emit('scrollTo', 2)
+          break
+        case 3:
+          this.$emit('scrollTo', 3)
+          break
+      }
     },
     back() {
       this.$router.back()

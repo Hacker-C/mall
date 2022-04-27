@@ -8,7 +8,12 @@
     <main>
       <header v-if="detailInfo.detailImage">{{ title }}</header>
       <section v-if="detailInfo.detailImage">
-        <img v-for="(item, index) in images" :src="item" :key="index" />
+        <img
+          @load="imagesLoad"
+          v-for="(item, index) in images"
+          :src="item"
+          :key="index"
+        />
       </section>
     </main>
   </div>
@@ -31,6 +36,12 @@ export default {
     },
     title() {
       return this.detailInfo.detailImage[0].key
+    }
+  },
+  methods: {
+    // TIP所有图片加载完才发送事件，以便于 Detial 组件正确的获取 offsetTop
+    imagesLoad() {
+      this.$emit('change')
     }
   }
 }
