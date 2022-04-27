@@ -5,6 +5,7 @@
       :controlIndex="controlIndex"
       :key="controlIndex"
     />
+    <!-- key 改变可以重新渲染组件，从而传入新的 controlIndex 值 -->
     <VScroll ref="dscroller" @change="onChange">
       <DetailSwiper :images="topImages" />
       <DetailBaseInfo :info="goods" />

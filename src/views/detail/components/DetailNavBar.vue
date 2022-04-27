@@ -20,7 +20,6 @@
 
 <script>
 import NavBar from '@/components/common/navbar/NavBar'
-import { debounce } from '@/common/utils.js'
 
 export default {
   name: 'DetailNavBar',
@@ -41,14 +40,11 @@ export default {
   },
   created() {
     this.currentIndex = this.controlIndex
-    // debounce(this.createCpn, 200, true)
   },
   methods: {
-    createCpn() {
-      this.currentIndex = this.controlIndex
-    },
     changeItem(index) {
       this.currentIndex = index
+      // TIP 发送当前点击的 index 给 Detail 组件使用
       this.$emit('scrollTo', index)
     },
     back() {
