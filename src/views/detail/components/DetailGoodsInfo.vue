@@ -1,8 +1,9 @@
 <template>
   <div class="detail-info">
     <header v-if="detailInfo.desc">
-      <span>{{ detailInfo.desc }}</span>
-      <span v-for="i in 2" :key="i"></span>
+      <div class="top"></div>
+      <div class="middle">{{ detailInfo.desc }}</div>
+      <div class="bottom"></div>
     </header>
     <main>
       <header v-if="detailInfo.detailImage">{{ title }}</header>
@@ -38,39 +39,41 @@ export default {
 <style lang="less" scoped>
 .detail-info {
   header {
-    display: flex;
-    padding: 10px;
-    span {
-      flex: 1;
-      height: 70px;
-      line-height: 70px;
-      font-size: 18px;
-      color: #333;
+    padding: 20px;
+    .middle {
+      padding: 15px 0;
+      font-size: 20px;
+      color: #444;
     }
-    span:nth-child(1) {
-      border-top: 2px solid #aaa;
-      &:before {
+    .top {
+      height: 1px;
+      width: 100px;
+      background-color: #333;
+      &::before {
         content: '';
         display: block;
         height: 6px;
         width: 6px;
-        background-color: #000;
+        background-color: #444;
         position: relative;
-        bottom: 4px;
+        bottom: 3px;
       }
     }
-    span:nth-child(3) {
-      position: relative;
-      border-bottom: 2px solid #aaa;
-      &:before {
+    .bottom {
+      height: 1px;
+      width: 100px;
+      background-color: #333;
+      position: absolute;
+      right: 20px;
+      &::after {
         content: '';
         display: block;
         height: 6px;
         width: 6px;
-        background-color: #000;
-        position: absolute;
-        bottom: -4px;
-        right: 0;
+        background-color: #444;
+        position: relative;
+        bottom: 3px;
+        left: 94px;
       }
     }
   }
