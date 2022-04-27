@@ -1,10 +1,10 @@
 <template>
   <div class="goods-item" @click="toDetail">
-    <img :src="item.show.img" />
+    <img :src="showImage" />
     <div class="info">
       <p>{{ item.title }}</p>
       <div>
-        <span class="price">{{ price(item.orgPrice) }}</span>
+        <span class="price">{{ price(item) }}</span>
         <span>
           <img class="star" src="@/assets/icons/star.png" alt="" />
           {{ item.cfav }}
@@ -23,11 +23,19 @@ export default {
     }
   },
   methods: {
-    price(p) {
-      return p.slice(1)
+    price(item) {
+      let p = item.orgPrice || item.price
+      return p.indexOf('￥') === -1 ? p : p.slice(1)
     },
     toDetail() {
-      this.$router.push('/detail/' + this.item.iid)
+      // TODO 有的 item_id 发送请求失效，所以判断一下，无法请求的就不请求
+      if (this.item.iid) this.$router.push('/detail/' + this.item.iid)
+      // this.$router.push('/detail/' + (this.item.iid || this.item.item_id))
+    }
+  },
+  computed: {
+    showImage() {
+      return this.item.image || this.item.show.img
     }
   }
 }
@@ -39,7 +47,6 @@ export default {
   position: relative;
   img {
     width: 180px;
-    // height: 300px;
   }
   .info {
     font-size: 20px;
