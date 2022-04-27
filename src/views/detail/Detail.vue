@@ -8,6 +8,7 @@
       <DetailGoodsInfo :detailInfo="detailInfo" />
       <DetailGoodsParams :goodsParams="goodsParams" />
       <DetailGoodsComments :rates="rates" />
+      <GoodsList :goodsList="recommendGoods" title="更多相似推荐" />
     </VScroll>
   </div>
 </template>
@@ -20,10 +21,17 @@ import DetailShopInfo from './components/DetailShopInfo.vue'
 import DetailGoodsInfo from './components/DetailGoodsInfo.vue'
 import DetailGoodsParams from './components/DetailGoodsParams.vue'
 import DetailGoodsComments from './components/DetailGoodsComments.vue'
+import GoodsList from '@/components/content/goods/GoodsList.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
 
-import { getDetail, Goods, Shop, GoodsParams } from '@/apis/detail.js'
+import {
+  getDetail,
+  getRecommend,
+  Goods,
+  Shop,
+  GoodsParams
+} from '@/apis/detail.js'
 
 export default {
   name: 'Detail',
@@ -36,12 +44,16 @@ export default {
       temp: 0,
       detailInfo: {},
       goodsParams: {},
-      rates: {}
+      rates: {},
+      recommendGoods: []
     }
   },
   created() {
     this.iid = this.$route.params.iid
+    // 请求商品详情数据
     this.getGoodsData(this.iid)
+    // 请求商品推荐数据
+    this.getRecommend()
   },
   methods: {
     async getGoodsData(iid) {
@@ -67,12 +79,10 @@ export default {
       // TIP 商品评论信息
       this.rates = data.rate
     },
-    DRefresh(done) {
-      setTimeout(() => {
-        done()
-      }, 1000)
+    async getRecommend() {
+      let res = await getRecommend()
+      this.recommendGoods = res.data.list
     },
-    DInfinite() {},
     onChange(y) {
       this.temp = y
     }
@@ -85,6 +95,7 @@ export default {
     DetailGoodsInfo,
     DetailGoodsParams,
     DetailGoodsComments,
+    GoodsList,
     VScroll
   }
 }
