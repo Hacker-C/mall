@@ -47,6 +47,7 @@ export default {
   position: relative;
   img {
     width: 180px;
+    border-radius: 10px;
   }
   .info {
     font-size: 20px;
