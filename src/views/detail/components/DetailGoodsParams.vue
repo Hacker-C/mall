@@ -49,14 +49,8 @@ export default {
       span:nth-child(1) {
         flex: 4;
       }
-      span:nth-child(2) {
+      span:nth-child(n + 2) {
         flex: 2;
-      }
-      span:nth-child(3) {
-        flex: 2;
-      }
-      span:nth-child(4) {
-        flex: 3;
       }
     }
   }
