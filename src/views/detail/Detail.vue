@@ -11,6 +11,7 @@
       <DetailBaseInfo :info="goods" />
       <DetailShopInfo :shop="shop" />
       <DetailGoodsInfo :detailInfo="detailInfo" />
+      <DetailGoodsParams :goodsParams="goodsParams" />
     </VScroll>
   </div>
 </template>
@@ -21,10 +22,11 @@ import DetailSwiper from './components/DetailSwiper.vue'
 import DetailBaseInfo from './components/DetailBaseInfo.vue'
 import DetailShopInfo from './components/DetailShopInfo.vue'
 import DetailGoodsInfo from './components/DetailGoodsInfo.vue'
+import DetailGoodsParams from './components/DetailGoodsParams.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
 
-import { getDetail, Goods, Shop } from '@/apis/detail.js'
+import { getDetail, Goods, Shop, GoodsParams } from '@/apis/detail.js'
 
 export default {
   name: 'Detail',
@@ -35,7 +37,8 @@ export default {
       goods: {},
       shop: {},
       temp: 0,
-      detailInfo: {}
+      detailInfo: {},
+      goodsParams: {}
     }
   },
   created() {
@@ -54,7 +57,13 @@ export default {
       // TIP 获取店铺信息
       let shop = new Shop(data.shopInfo)
       this.shop = shop
+      // TIP 商品详情数据
       this.detailInfo = data.detailInfo
+      // TIP 商品参数数据
+      this.goodsParams = new GoodsParams(
+        data.itemParams.info,
+        data.itemParams.rule
+      )
     },
     DRefresh(done) {
       setTimeout(() => {
@@ -72,6 +81,7 @@ export default {
     DetailBaseInfo,
     DetailShopInfo,
     DetailGoodsInfo,
+    DetailGoodsParams,
     VScroll
   }
 }
