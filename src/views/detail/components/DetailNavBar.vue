@@ -20,6 +20,7 @@
 
 <script>
 import NavBar from '@/components/common/navbar/NavBar'
+import { debounce } from '@/common/utils.js'
 
 export default {
   name: 'DetailNavBar',
@@ -32,23 +33,23 @@ export default {
       currentIndex: 0
     }
   },
+  props: {
+    controlIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  created() {
+    this.currentIndex = this.controlIndex
+    // debounce(this.createCpn, 200, true)
+  },
   methods: {
+    createCpn() {
+      this.currentIndex = this.controlIndex
+    },
     changeItem(index) {
       this.currentIndex = index
-      switch (index) {
-        case 0:
-          this.$emit('scrollTo', 0)
-          break
-        case 1:
-          this.$emit('scrollTo', 1)
-          break
-        case 2:
-          this.$emit('scrollTo', 2)
-          break
-        case 3:
-          this.$emit('scrollTo', 3)
-          break
-      }
+      this.$emit('scrollTo', index)
     },
     back() {
       this.$router.back()

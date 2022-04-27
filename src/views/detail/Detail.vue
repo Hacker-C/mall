@@ -1,6 +1,10 @@
 <template>
   <div class="detail-container">
-    <DetailNavBar @scrollTo="scrollTo" />
+    <DetailNavBar
+      @scrollTo="scrollTo"
+      :controlIndex="controlIndex"
+      :key="controlIndex"
+    />
     <VScroll ref="dscroller" @change="onChange">
       <DetailSwiper :images="topImages" />
       <DetailBaseInfo :info="goods" />
@@ -52,8 +56,22 @@ export default {
       recommendGoods: [],
       paramsY: 0, // TIP 商品参数模块的 offsetTop
       commentsY: 0,
-      recommendY: 0
+      recommendY: 0,
+      // TIP 父组件提供控制 navbar 显示的中间变量
+      // TIP 此变量的值可以为 0、1、2、3，分别代表不同模块的位置
+      controlIndex: 0
     }
+  },
+  components: {
+    DetailNavBar,
+    DetailSwiper,
+    DetailBaseInfo,
+    DetailShopInfo,
+    DetailGoodsInfo,
+    DetailGoodsParams,
+    DetailGoodsComments,
+    GoodsList,
+    VScroll
   },
   created() {
     this.iid = this.$route.params.iid
@@ -95,12 +113,26 @@ export default {
     },
     onChange(y) {
       this.temp = y
+      this.srollToShow(y)
+    },
+    // TIP 滚动到指定位置，显示不同的 navbar
+    srollToShow(y) {
+      if (y < this.paramsY - 50) {
+        this.controlIndex !== 0 && (this.controlIndex = 0)
+      } else if (y < this.commentsY - 50) {
+        this.controlIndex !== 1 && (this.controlIndex = 1)
+      } else if (y < this.recommendY - 50) {
+        this.controlIndex !== 2 && (this.controlIndex = 2)
+      } else {
+        this.controlIndex !== 3 && (this.controlIndex = 3)
+      }
     },
     imagesLoaded() {
       this.paramsY = this.$refs.paramsCpn.$el.offsetTop
       this.commentsY = this.$refs.commentsCpn.$el.offsetTop
       this.recommendY = this.$refs.recommendCpn.$el.offsetTop
     },
+    // TIP Navbar 点击发送此事件
     scrollTo(x) {
       if (x === 0) this.help(0)
       else if (x === 1) this.help(this.paramsY - 50)
@@ -117,17 +149,6 @@ export default {
         this.$refs.dscroller.scrollTo(0, y)
       }, 10)
     }
-  },
-  components: {
-    DetailNavBar,
-    DetailSwiper,
-    DetailBaseInfo,
-    DetailShopInfo,
-    DetailGoodsInfo,
-    DetailGoodsParams,
-    DetailGoodsComments,
-    GoodsList,
-    VScroll
   }
 }
 </script>
