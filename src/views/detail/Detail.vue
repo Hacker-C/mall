@@ -48,15 +48,17 @@ export default {
   methods: {
     async getGoodsData(iid) {
       let res = await getDetail(iid)
-      // TIP 获取轮播图数据
       let data = res.result
+      // TIP 获取轮播图数据
       this.topImages = data.itemInfo.topImages
       // TIP 获取商品基本信息
-      let goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
-      this.goods = goods
+      this.goods = new Goods(
+        data.itemInfo,
+        data.columns,
+        data.shopInfo.services
+      )
       // TIP 获取店铺信息
-      let shop = new Shop(data.shopInfo)
-      this.shop = shop
+      this.shop = new Shop(data.shopInfo)
       // TIP 商品详情数据
       this.detailInfo = data.detailInfo
       // TIP 商品参数数据
