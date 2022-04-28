@@ -17,9 +17,6 @@
 <script>
 // TODO 封装 VScroll 组件
 
-// TIP 节流函数
-import { throttle } from '@/common/utils.js'
-
 export default {
   name: 'VScroll',
   props: {
@@ -60,7 +57,7 @@ export default {
         this.x = left
         this.y = top
       }
-    }, 500)
+    }, 200)
   },
   beforeDestroy() {
     this.timer = null
