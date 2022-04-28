@@ -7,7 +7,7 @@
       <div>全选</div>
     </div>
     <div class="total">合计：</div>
-    <div class="go">去结算(6)</div>
+    <div class="go">去结算({{ totalCheked }})</div>
   </div>
 </template>
 
@@ -18,7 +18,8 @@ export default {
   name: 'CartBottomBar',
   computed: {
     ...mapGetters({
-      isCheckAll: 'isCheckAll'
+      isCheckAll: 'isCheckAll',
+      totalCheked: 'totalCheked'
     })
   },
   methods: {
