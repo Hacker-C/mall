@@ -20,6 +20,7 @@
       />
     </VScroll>
     <DetailBottomBar />
+    <BackTop v-show="isShowBackTop" @click.native="scrollToTop" />
   </div>
 </template>
 
@@ -35,6 +36,7 @@ import DetailBottomBar from './components/DetailBottomBar.vue'
 import GoodsList from '@/components/content/goods/GoodsList.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
+import BackTop from '@/components/content/backtop/BackTop'
 
 import {
   getDetail,
@@ -52,7 +54,7 @@ export default {
       topImages: [],
       goods: {},
       shop: {},
-      temp: 0,
+      temp: 0, // TIP scrollTop 值
       detailInfo: {},
       goodsParams: {},
       rates: {},
@@ -62,7 +64,8 @@ export default {
       recommendY: 0,
       // TIP 父组件提供控制 navbar 显示的中间变量
       // TIP 此变量的值可以为 0、1、2、3，分别代表不同模块的位置
-      controlIndex: 0
+      controlIndex: 0,
+      isShowBackTop: false
     }
   },
   components: {
@@ -75,7 +78,8 @@ export default {
     DetailGoodsComments,
     DetailBottomBar,
     GoodsList,
-    VScroll
+    VScroll,
+    BackTop
   },
   created() {
     this.iid = this.$route.params.iid
@@ -118,6 +122,13 @@ export default {
     onChange(y) {
       this.temp = y
       this.srollToShow(y)
+      if (
+        (y > 800 && !this.isShowBackTop) ||
+        (y <= 800 && this.isShowBackTop)
+      ) {
+        // BUGFIX 节流思想，防止组件创建过于频繁影响页面渲染性能
+        this.isShowBackTop = !this.isShowBackTop
+      }
     },
     // TIP 滚动到指定位置，显示不同的 navbar
     srollToShow(y) {
@@ -137,7 +148,10 @@ export default {
       this.recommendY = this.$refs.recommendCpn.$el.offsetTop
     },
     // TIP Navbar 点击发送此事件
-    scrollTo(x) {
+    scrollToTop() {
+      this.help(0)
+    },
+    scrollTo(x = 0) {
       if (x === 0) this.help(0)
       else if (x === 1) this.help(this.paramsY - 50)
       else if (x === 2) {

@@ -60,7 +60,10 @@ export default {
         this.x = left
         this.y = top
       }
-    }, 300)
+    }, 500)
+  },
+  beforeDestroy() {
+    this.timer = null
   },
   // TIP 监听 emit(change) 事件，只有当 scrollTop 值改变了才发送事件给 home
   watch: {
