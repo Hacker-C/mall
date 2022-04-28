@@ -59,8 +59,6 @@ export default {
     }
     p {
       width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
       font-size: 18px;
       padding: 5px;
       color: #333;

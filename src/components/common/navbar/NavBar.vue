@@ -13,7 +13,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'NavBar'
+}
 </script>
 
 <style lang="less" scoped>
