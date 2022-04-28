@@ -187,7 +187,6 @@ export default {
       product.desc = this.goods.desc
       product.price = this.goods.realPrice
       product.iid = this.iid
-      product.count = 1
       this.$store.dispatch('addToCart', product)
       this.msgKey++
       this.isMessageShow = true

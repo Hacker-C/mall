@@ -1,8 +1,12 @@
 <template>
   <div class="goods-item">
     <div class="check">
-      <div>
-        <img src="@/assets/images/cart/chosen.png" alt="" v-show="true" />
+      <div @click="check">
+        <img
+          src="@/assets/images/cart/chosen.png"
+          alt=""
+          v-show="goods.checked"
+        />
       </div>
     </div>
     <div @click="toDetail" class="img-box">
@@ -33,6 +37,9 @@ export default {
   methods: {
     toDetail() {
       this.$router.push('/detail/' + this.goods.iid)
+    },
+    check() {
+      this.goods.checked = !this.goods.checked
     }
   }
 }
