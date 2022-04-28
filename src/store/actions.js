@@ -1,4 +1,9 @@
-import { ADD_CART, ADD_COUNTER } from './mutations-types'
+import {
+  ADD_CART,
+  ADD_COUNTER,
+  CHANGE_CHECKED,
+  CHECK_ALL_TO
+} from './mutations-types'
 
 export default {
   addToCart(context, payload) {
@@ -17,6 +22,21 @@ export default {
     if (!isExist) {
       // 不存在
       context.commit(ADD_CART, payload)
+    }
+  },
+  check(context, payload) {
+    for (let i = 0; i < context.state.cartList.length; i++) {
+      if (context.state.cartList[i].iid === payload.iid) {
+        context.commit(CHANGE_CHECKED, context.state.cartList[i])
+      }
+    }
+  },
+  checkAll(context, payload) {
+    for (let i = 0; i < context.state.cartList.length; i++) {
+      context.commit(CHECK_ALL_TO, {
+        item: context.state.cartList[i],
+        check: payload
+      })
     }
   }
 }

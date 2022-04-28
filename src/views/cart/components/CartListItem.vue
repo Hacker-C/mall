@@ -39,7 +39,9 @@ export default {
       this.$router.push('/detail/' + this.goods.iid)
     },
     check() {
-      this.goods.checked = !this.goods.checked
+      // this.goods.checked = !this.goods.checked
+      // console.log(this.goods.checked)
+      this.$store.dispatch('check', this.goods)
     }
   }
 }
