@@ -8,6 +8,10 @@ import './assets/css/base.less'
 import VueScroller from 'vue-scroller'
 Vue.use(VueScroller)
 
+// TIP fastclick 移动端click事件300毫秒延迟
+import FastClick from 'fastclick'
+FastClick.attach(document.body)
+
 Vue.config.productionTip = false
 
 new Vue({
