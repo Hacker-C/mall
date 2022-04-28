@@ -5,6 +5,11 @@
       :controlIndex="controlIndex"
       :key="controlIndex"
     />
+    <Message
+      v-show="isMessageShow"
+      :key="msgKey"
+      msg="加入成功，正在购车等候~"
+    />
     <!-- key 改变可以重新渲染组件，从而传入新的 controlIndex 值 -->
     <VScroll ref="dscroller" @change="onChange">
       <DetailSwiper :images="topImages" />
@@ -19,7 +24,7 @@
         ref="recommendCpn"
       />
     </VScroll>
-    <DetailBottomBar />
+    <DetailBottomBar @addCart="addToCart" />
     <BackTop v-show="isShowBackTop" @click.native="scrollToTop" />
   </div>
 </template>
@@ -37,6 +42,7 @@ import GoodsList from '@/components/content/goods/GoodsList.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
 import BackTop from '@/components/content/backtop/BackTop'
+import Message from '@/components/common/message/Message'
 
 import {
   getDetail,
@@ -45,6 +51,8 @@ import {
   Shop,
   GoodsParams
 } from '@/apis/detail.js'
+
+import { throttle } from '@/common/utils.js'
 
 export default {
   name: 'Detail',
@@ -65,7 +73,9 @@ export default {
       // TIP 父组件提供控制 navbar 显示的中间变量
       // TIP 此变量的值可以为 0、1、2、3，分别代表不同模块的位置
       controlIndex: 0,
-      isShowBackTop: false
+      isShowBackTop: false,
+      isMessageShow: false,
+      msgKey: -99
     }
   },
   components: {
@@ -79,7 +89,8 @@ export default {
     DetailBottomBar,
     GoodsList,
     VScroll,
-    BackTop
+    BackTop,
+    Message
   },
   created() {
     this.iid = this.$route.params.iid
@@ -166,7 +177,21 @@ export default {
       setTimeout(() => {
         this.$refs.dscroller.scrollTo(0, y)
       }, 10)
-    }
+    },
+    // TIP 添加到购物车
+    // BUGFIX 添加节流，设置 2 秒内多次点击，只生效一次
+    addToCart: throttle(function () {
+      const product = {}
+      product.image = this.topImages[0]
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this.goods.realPrice
+      product.iid = this.iid
+      product.count = 1
+      this.$store.dispatch('addToCart', product)
+      this.msgKey++
+      this.isMessageShow = true
+    }, 2000)
   }
 }
 </script>
