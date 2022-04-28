@@ -19,6 +19,7 @@
         ref="recommendCpn"
       />
     </VScroll>
+    <DetailBottomBar />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import DetailShopInfo from './components/DetailShopInfo.vue'
 import DetailGoodsInfo from './components/DetailGoodsInfo.vue'
 import DetailGoodsParams from './components/DetailGoodsParams.vue'
 import DetailGoodsComments from './components/DetailGoodsComments.vue'
+import DetailBottomBar from './components/DetailBottomBar.vue'
 import GoodsList from '@/components/content/goods/GoodsList.vue'
 
 import VScroll from '@/components/common/scroll/VSroll'
@@ -71,6 +73,7 @@ export default {
     DetailGoodsInfo,
     DetailGoodsParams,
     DetailGoodsComments,
+    DetailBottomBar,
     GoodsList,
     VScroll
   },
