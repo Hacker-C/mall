@@ -1,19 +1,17 @@
-# mall
+# coderwhy mall 项目
 
-## Project setup
+## 本地预览和开发
+
 ```
+mkdir mall
+git clone git@github.com:Hacker-C/mall.git mall
+cd mall
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
+## 打包上线
+
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
