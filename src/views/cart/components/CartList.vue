@@ -37,6 +37,8 @@ export default {
   }
   p {
     font-size: 18px;
+    margin-top: 10px;
+    color: #333;
   }
 }
 </style>
