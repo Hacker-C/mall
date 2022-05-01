@@ -7,6 +7,9 @@
     :on-refresh="refresh"
     :on-infinite="infinite"
     ref="vscroller"
+    :setWidth="setWidth"
+    :setWidth75="setWidth75"
+    :class="{ scroller: setWidth, setWidth75: setWidth75 }"
   >
     <div class="content">
       <slot></slot>
@@ -20,6 +23,14 @@
 export default {
   name: 'VScroll',
   props: {
+    setWidth: {
+      type: Boolean,
+      default: false
+    },
+    setWidth75: {
+      type: Boolean,
+      default: false
+    },
     refresh: {
       type: Function,
       default: function (done) {
@@ -94,4 +105,11 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.scroller {
+  width: 25% !important;
+}
+.setWidth75 {
+  // width: 75% !important;
+}
+</style>
