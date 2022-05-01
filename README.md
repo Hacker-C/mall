@@ -1,4 +1,4 @@
-# coderwhy mall 项目(移动端)
+# coderwhy vue2 mall 项目(移动端)
 
 ## 本地预览和开发
 
