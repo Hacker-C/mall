@@ -32,4 +32,6 @@ npm run build
 
 ## 接口文档
 
+> 具体地址已变，详情咨询 coderwhy 老师账号
+
 - https://www.showdoc.com.cn/552706891688509/3263464702153146
