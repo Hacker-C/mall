@@ -1,5 +1,9 @@
 # coderwhy vue2 mall 项目(移动端)
 
+## 线上部署(移动端)
+
+- http://124.222.44.115:8080
+
 ## 本地预览和开发
 
 ```
@@ -25,10 +29,6 @@ npm run build
 - vue-scroller
 - less
 - 移动端适配：amfe-flexible + postcss-pxtorem
-
-## 项目预览
-
-- http://124.222.44.115:8080/home
 
 ## 接口文档
 
