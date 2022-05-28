@@ -2,7 +2,7 @@
 
 ## 线上部署(移动端)
 
-- http://124.222.44.115:8080
+- http://m-mall.mphy.top
 
 ## 本地预览和开发
 
@@ -14,12 +14,30 @@ npm install
 npm run serve
 ```
 
-## 打包上线
+## 打包部署
 
+打包静态文件：
 ```
 npm run build
 ```
 
+nginx 部署：
+```nginx
+server {
+  listen 80;
+  server_name m-mall.mphy.top;
+  location / {
+    root /var/www/m-mall/dist;
+    index index.html;
+    try_files  $uri $uri/ /index.html;
+  }
+}
+```
+添加一条 DNS 记录指向你的服务器，重启 nginx。
+
+## 提示
+
+❗ 部署的网站底部有一条备案号信息，因工信部要求所添加，**所以影响了部分页面的布局**，在 `src\components\common\tabbar\TabBar.vue` 中移除 `BeiAn.vue` 组件即可。
 ## 技术栈
 
 - vue2
